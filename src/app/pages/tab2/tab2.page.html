@@ -1,0 +1,46 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Encabezados
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-segment
+    scrollable
+    mode="md"
+    color="primary"
+    (ionChange)="segmentChange($event)"
+  >
+    <ion-segment-button
+      mode="md"
+      [value]="categoria"
+      *ngFor="let categoria of categorias"
+      ><ion-label text-capitalize>{{
+        categoria
+      }}</ion-label></ion-segment-button
+    >
+  </ion-segment>
+</ion-header>
+
+<ion-content color="dark">
+  <app-noticias
+    *ngIf="noticias.length > 0"
+    [noticias]="noticias"
+  ></app-noticias>
+  <div *ngIf="noticias.length === 0">
+    <app-notice-skeleton
+      *ngFor="let item of [1, 1, 1, 1]"
+    ></app-notice-skeleton>
+  </div>
+  <ion-infinite-scroll
+    *ngIf="noticias.length > 0"
+    threshold="150px"
+    (ionInfinite)="loadData($event)"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="crescent"
+      loadingText="Cargando..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

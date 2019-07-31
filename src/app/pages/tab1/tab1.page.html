@@ -1,0 +1,33 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-title>
+      Clissman's News
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+  <app-noticias
+    *ngIf="noticias.length > 0"
+    [noticias]="noticias"
+  ></app-noticias>
+
+  <div *ngIf="noticias.length === 0">
+    <app-notice-skeleton
+      *ngFor="let item of [1, 1, 1, 1]"
+    ></app-notice-skeleton>
+  </div>
+
+  <ion-infinite-scroll
+    *ngIf="noticias.length > 0"
+    threshold="150px"
+    (ionInfinite)="loadData($event)"
+  >
+    <ion-infinite-scroll-content
+      color="light"
+      loadingSpinner="crescent"
+      loadingText="Cargando..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
