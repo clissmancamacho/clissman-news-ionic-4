@@ -25,7 +25,7 @@ export class NoticiaComponent implements OnInit {
   ngOnInit() {}
 
   openNotice() {
-    console.log("noticia", this.noticia.url);
+    // console.log("noticia", this.noticia.url);
     // _system open link on native mobile browser
     const browser = this.iab.create(this.noticia.url, "_system");
   }
@@ -40,7 +40,7 @@ export class NoticiaComponent implements OnInit {
         icon: "trash",
         cssClass: "action-dark",
         handler: () => {
-          console.log("Borrar de Favorito");
+          // console.log("Borrar de Favorito");
           this.dataLocalService.deleteFavoriteNotice(this.noticia);
         }
       };
@@ -51,7 +51,7 @@ export class NoticiaComponent implements OnInit {
         icon: "star",
         cssClass: "action-dark",
         handler: () => {
-          console.log("Favorito");
+          // console.log("Favorito");
           this.dataLocalService.saveFavoriteNotices(this.noticia);
         }
       };
@@ -78,7 +78,7 @@ export class NoticiaComponent implements OnInit {
           role: "cancel",
           cssClass: "action-dark",
           handler: () => {
-            console.log("Cancel clicked");
+            // console.log("Cancel clicked");
           }
         }
       ]

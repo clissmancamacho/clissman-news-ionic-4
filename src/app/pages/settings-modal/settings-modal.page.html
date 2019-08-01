@@ -1,0 +1,31 @@
+<ion-header no-border>
+  <ion-toolbar color="dark" slot="start">
+    <ion-title>Configuración</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close" slot="icon-only"> </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="dark" padding>
+  <form #formulario="ngForm" (ngSubmit)="submitForm()">
+    <ion-label class="text-white">País de Preferencia:</ion-label>
+    <ion-radio-group name="radio-group" (ionChange)="radioGroupChange($event)">
+      <div *ngFor="let country of countries">
+        <ion-item color="dark">
+          <ion-label slot="start" class="text-white">{{
+            country.name
+          }}</ion-label>
+          <ion-radio
+            slot="end"
+            [value]="country.code"
+            [(checked)]="country.isSelect"
+          >
+          </ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+    <ion-button expand="full" type="submit">Guardar Configuración</ion-button>
+  </form>
+</ion-content>

@@ -2,13 +2,20 @@ import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { Article } from "../interfaces/interfaces";
 import { ToastController } from "@ionic/angular";
+import { MessageService } from "./message.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class DataLocalService {
   favoriteNotices: Article[] = [];
-  constructor(private storage: Storage, private toastCtrl: ToastController) {
+  preferenceCountryCode: string = "ve";
+  constructor(
+    private storage: Storage,
+    private toastCtrl: ToastController,
+    private messageService: MessageService
+  ) {
+    this.loadPreferenceCountry();
     this.loadFavoriteNotices();
   }
 
@@ -24,10 +31,30 @@ export class DataLocalService {
     }
   }
 
+  savePreferenceCountry(countryCode: string) {
+    if (this.preferenceCountryCode !== countryCode) {
+      this.preferenceCountryCode = countryCode;
+      this.storage.set("preferenceCountryCode", countryCode);
+      this.presentToast("Pais de Preferencia Actualizado");
+      this.messageService.sendMessage("RefreshNotices");
+    } else {
+      this.presentToast("Este pais ya es el de preferencia");
+    }
+  }
+
   async loadFavoriteNotices() {
     const favoriteNotices = await this.storage.get("favoriteNotices");
     if (favoriteNotices) {
       this.favoriteNotices = favoriteNotices;
+    }
+  }
+
+  async loadPreferenceCountry() {
+    const preferenceCountryCode = await this.storage.get(
+      "preferenceCountryCode"
+    );
+    if (preferenceCountryCode) {
+      this.preferenceCountryCode = preferenceCountryCode;
     }
   }
 
