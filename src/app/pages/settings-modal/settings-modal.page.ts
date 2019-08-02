@@ -50,5 +50,6 @@ export class SettingsModalPage implements OnInit {
 
   submitForm() {
     this.dataLocalService.savePreferenceCountry(this.countryCodeSelected);
+    this.modalCtrl.dismiss();
   }
 }

@@ -25,9 +25,9 @@ export class DataLocalService {
       this.favoriteNotices.unshift(notice);
       this.storage.set("favoriteNotices", this.favoriteNotices);
       // Show toast info
-      this.presentToast("Agregado a favoritos");
+      this.presentToast("Agregado a favoritos", "primary");
     } else {
-      this.presentToast("Esta noticia ya está en favoritos");
+      this.presentToast("Esta noticia ya está en favoritos", "danger");
     }
   }
 
@@ -35,10 +35,10 @@ export class DataLocalService {
     if (this.preferenceCountryCode !== countryCode) {
       this.preferenceCountryCode = countryCode;
       this.storage.set("preferenceCountryCode", countryCode);
-      this.presentToast("Pais de Preferencia Actualizado");
+      this.presentToast("Pais de Preferencia Actualizado", "primary");
       this.messageService.sendMessage("RefreshNotices");
     } else {
-      this.presentToast("Este pais ya es el de preferencia");
+      this.presentToast("Este pais ya es el de preferencia", "danger");
     }
   }
 
@@ -64,12 +64,14 @@ export class DataLocalService {
     );
     this.storage.set("favoriteNotices", this.favoriteNotices);
     // Show toast info
-    this.presentToast("Noticia eliminada de favoritos");
+    this.presentToast("Noticia eliminada de favoritos", "primary");
   }
 
-  async presentToast(message: string) {
+  async presentToast(message: string, color: string) {
     const toast = await this.toastCtrl.create({
       message,
+      color,
+      cssClass: "custom-toast-position",
       duration: 1500
     });
     toast.present();
