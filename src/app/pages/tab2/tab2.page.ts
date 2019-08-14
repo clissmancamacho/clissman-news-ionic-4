@@ -14,7 +14,6 @@ export class Tab2Page implements OnInit, OnDestroy {
   @ViewChild(IonSegment, null) segment: IonSegment;
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   categorias = [
-    { name: "General", value: "general" },
     { name: "Negocios", value: "business" },
     { name: "Tecnología", value: "technology" },
     { name: "Ciencia", value: "science" },
